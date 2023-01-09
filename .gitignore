@@ -1,0 +1,7 @@
+.idea
+.debezium_connect
+.kafka
+.mongoconfig
+.mongodb
+.mysql
+.zookeeper

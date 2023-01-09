@@ -1,0 +1,547 @@
+{
+	"info": {
+		"_postman_id": "70ccf44a-d8b0-4943-a5ba-5ded69368a50",
+		"name": "Metaroom",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21260639"
+	},
+	"item": [
+		{
+			"name": "Subaid",
+			"item": [
+				{
+					"name": "mySQL source",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"mysql-connector1\",\r\n    \"config\": {\r\n        \"connector.class\": \"io.debezium.connector.mysql.MySqlConnector\",\r\n        \"database.hostname\": \"host.docker.internal\",\r\n        \"database.port\": \"3306\",\r\n        \"database.user\": \"debezium\",\r\n        \"database.password\": \"debezium_password\",\r\n        \"database.server.id\": \"1\",\r\n        \"database.server.name\": \"mysql_server_name\",\r\n        \"database.include.list\": \"subaid_01\",\r\n        \"database.history.kafka.bootstrap.servers\": \"kafka:29092\",\r\n        \"database.history.kafka.topic\": \"dbhistory.subaid_01\",\r\n        \"include.schema.changes\": \"true\",\r\n        \"database.allowPublicKeyRetrieval\": \"true\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/connectors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"connectors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sink Consultations",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"mongodb-sink-Consultations\",\r\n    \"config\": {\r\n        \"connector.class\": \"com.mongodb.kafka.connect.MongoSinkConnector\",\r\n        \"tasks.max\": \"1\",\r\n        \"topics\": \"mysql_server_name.subaid_01.Consultations\",\r\n        \"connection.uri\": \"{{MongoSink}}\",\r\n        \"database\": \"{{MongoDB}}\",\r\n        \"collection\": \"consultations\",\r\n        \"change.data.capture.handler\": \"com.mongodb.kafka.connect.sink.cdc.debezium.rdbms.mysql.MysqlHandler\"\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/connectors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"connectors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sink Diagnostic",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"mongodb-sink-Diagnostic\",\r\n    \"config\": {\r\n        \"connector.class\": \"com.mongodb.kafka.connect.MongoSinkConnector\",\r\n        \"tasks.max\": \"1\",\r\n        \"topics\": \"mysql_server_name.subaid_01.Diagnostic\",\r\n        \"connection.uri\": \"{{MongoSink}}\",\r\n        \"database\": \"{{MongoDB}}\",\r\n        \"collection\": \"diagnostic\",\r\n        \"change.data.capture.handler\": \"com.mongodb.kafka.connect.sink.cdc.debezium.rdbms.mysql.MysqlHandler\"\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/connectors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"connectors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sink Diagnostics",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"mongodb-sink-Diagnostics\",\r\n    \"config\": {\r\n        \"connector.class\": \"com.mongodb.kafka.connect.MongoSinkConnector\",\r\n        \"tasks.max\": \"1\",\r\n        \"topics\": \"mysql_server_name.subaid_01.Diagnostics\",\r\n        \"connection.uri\": \"{{MongoSink}}\",\r\n        \"database\": \"{{MongoDB}}\",\r\n        \"collection\": \"diagnostics\",\r\n        \"change.data.capture.handler\": \"com.mongodb.kafka.connect.sink.cdc.debezium.rdbms.mysql.MysqlHandler\"\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/connectors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"connectors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sink Drug",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"mongodb-sink\",\r\n    \"config\": {\r\n        \"connector.class\": \"com.mongodb.kafka.connect.MongoSinkConnector\",\r\n        \"tasks.max\": \"1\",\r\n        \"topics\": \"mysql_server_name.subaid_01.Drug_SINK\",\r\n        \"connection.uri\": \"{{MongoSink}}\",\r\n        \"database\": \"{{MongoDB}}\",\r\n        \"collection\": \"drugs\",\r\n        \"change.data.capture.handler\": \"com.mongodb.kafka.connect.sink.cdc.debezium.rdbms.mysql.MysqlHandler\"\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/connectors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"connectors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sink Incident",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"mongodb-sink-Incident\",\r\n    \"config\": {\r\n        \"connector.class\": \"com.mongodb.kafka.connect.MongoSinkConnector\",\r\n        \"tasks.max\": \"1\",\r\n        \"topics\": \"mysql_server_name.subaid_01.Incident\",\r\n        \"connection.uri\": \"{{MongoSink}}\",\r\n        \"database\": \"{{MongoDB}}\",\r\n        \"collection\": \"incident\",\r\n        \"change.data.capture.handler\": \"com.mongodb.kafka.connect.sink.cdc.debezium.rdbms.mysql.MysqlHandler\"\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/connectors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"connectors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sink Incidents",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"mongodb-sink-Incidents\",\r\n    \"config\": {\r\n        \"connector.class\": \"com.mongodb.kafka.connect.MongoSinkConnector\",\r\n        \"tasks.max\": \"1\",\r\n        \"topics\": \"mysql_server_name.subaid_01.Incidents\",\r\n        \"connection.uri\": \"{{MongoSink}}\",\r\n        \"database\": \"{{MongoDB}}\",\r\n        \"collection\": \"incidents\",\r\n        \"change.data.capture.handler\": \"com.mongodb.kafka.connect.sink.cdc.debezium.rdbms.mysql.MysqlHandler\"\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/connectors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"connectors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sink Insurance",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"mongodb-sink-Insurance\",\r\n    \"config\": {\r\n        \"connector.class\": \"com.mongodb.kafka.connect.MongoSinkConnector\",\r\n        \"tasks.max\": \"1\",\r\n        \"topics\": \"mysql_server_name.subaid_01.Insurance\",\r\n        \"connection.uri\": \"{{MongoSink}}\",\r\n        \"database\": \"{{MongoDB}}\",\r\n        \"collection\": \"insurance\",\r\n        \"change.data.capture.handler\": \"com.mongodb.kafka.connect.sink.cdc.debezium.rdbms.mysql.MysqlHandler\"\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/connectors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"connectors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sink Insurances",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"mongodb-sink-Insurances\",\r\n    \"config\": {\r\n        \"connector.class\": \"com.mongodb.kafka.connect.MongoSinkConnector\",\r\n        \"tasks.max\": \"1\",\r\n        \"topics\": \"mysql_server_name.subaid_01.Insurances\",\r\n        \"connection.uri\": \"{{MongoSink}}\",\r\n        \"database\": \"{{MongoDB}}\",\r\n        \"collection\": \"insurances\",\r\n        \"change.data.capture.handler\": \"com.mongodb.kafka.connect.sink.cdc.debezium.rdbms.mysql.MysqlHandler\"\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/connectors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"connectors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sink Patients",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"mongodb-sink-Patients\",\r\n    \"config\": {\r\n        \"connector.class\": \"com.mongodb.kafka.connect.MongoSinkConnector\",\r\n        \"tasks.max\": \"1\",\r\n        \"topics\": \"mysql_server_name.subaid_01.Patients_SINK\",\r\n        \"connection.uri\": \"{{MongoSink}}\",\r\n        \"database\": \"{{MongoDB}}\",\r\n        \"collection\": \"users\",\r\n        \"change.data.capture.handler\": \"com.mongodb.kafka.connect.sink.cdc.debezium.rdbms.mysql.MysqlHandler\"\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/connectors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"connectors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sink Payment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"mongodb-sink-Payment\",\r\n    \"config\": {\r\n        \"connector.class\": \"com.mongodb.kafka.connect.MongoSinkConnector\",\r\n        \"tasks.max\": \"1\",\r\n        \"topics\": \"mysql_server_name.subaid_01.Payment\",\r\n        \"connection.uri\": \"{{MongoSink}}\",\r\n        \"database\": \"{{MongoDB}}\",\r\n        \"collection\": \"payment\",\r\n        \"change.data.capture.handler\": \"com.mongodb.kafka.connect.sink.cdc.debezium.rdbms.mysql.MysqlHandler\"\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/connectors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"connectors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sink Payments",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"mongodb-sink-Payments\",\r\n    \"config\": {\r\n        \"connector.class\": \"com.mongodb.kafka.connect.MongoSinkConnector\",\r\n        \"tasks.max\": \"1\",\r\n        \"topics\": \"mysql_server_name.subaid_01.Payments\",\r\n        \"connection.uri\": \"{{MongoSink}}\",\r\n        \"database\": \"{{MongoDB}}\",\r\n        \"collection\": \"payments\",\r\n        \"change.data.capture.handler\": \"com.mongodb.kafka.connect.sink.cdc.debezium.rdbms.mysql.MysqlHandler\"\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/connectors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"connectors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sink Prescriptions",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"mongodb-sink-Prescriptions\",\r\n    \"config\": {\r\n        \"connector.class\": \"com.mongodb.kafka.connect.MongoSinkConnector\",\r\n        \"tasks.max\": \"1\",\r\n        \"topics\": \"mysql_server_name.subaid_01.Prescriptions\",\r\n        \"connection.uri\": \"{{MongoSink}}\",\r\n        \"database\": \"{{MongoDB}}\",\r\n        \"collection\": \"prescriptions\",\r\n        \"change.data.capture.handler\": \"com.mongodb.kafka.connect.sink.cdc.debezium.rdbms.mysql.MysqlHandler\"\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/connectors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"connectors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sink Procedre",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"mongodb-sink-Procedre\",\r\n    \"config\": {\r\n        \"connector.class\": \"com.mongodb.kafka.connect.MongoSinkConnector\",\r\n        \"tasks.max\": \"1\",\r\n        \"topics\": \"mysql_server_name.subaid_01.Procedre\",\r\n        \"connection.uri\": \"{{MongoSink}}\",\r\n        \"database\": \"{{MongoDB}}\",\r\n        \"collection\": \"procedre\",\r\n        \"change.data.capture.handler\": \"com.mongodb.kafka.connect.sink.cdc.debezium.rdbms.mysql.MysqlHandler\"\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/connectors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"connectors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sink Procedures",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"mongodb-sink-Procedures\",\r\n    \"config\": {\r\n        \"connector.class\": \"com.mongodb.kafka.connect.MongoSinkConnector\",\r\n        \"tasks.max\": \"1\",\r\n        \"topics\": \"mysql_server_name.subaid_01.Procedures\",\r\n        \"connection.uri\": \"{{MongoSink}}\",\r\n        \"database\": \"{{MongoDB}}\",\r\n        \"collection\": \"procedures\",\r\n        \"change.data.capture.handler\": \"com.mongodb.kafka.connect.sink.cdc.debezium.rdbms.mysql.MysqlHandler\"\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/connectors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"connectors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sink Reporting",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"mongodb-sink-Reporting\",\r\n    \"config\": {\r\n        \"connector.class\": \"com.mongodb.kafka.connect.MongoSinkConnector\",\r\n        \"tasks.max\": \"1\",\r\n        \"topics\": \"mysql_server_name.subaid_01.Reporting\",\r\n        \"connection.uri\": \"{{MongoSink}}\",\r\n        \"database\": \"{{MongoDB}}\",\r\n        \"collection\": \"reporting\",\r\n        \"change.data.capture.handler\": \"com.mongodb.kafka.connect.sink.cdc.debezium.rdbms.mysql.MysqlHandler\"\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/connectors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"connectors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sink Stocks",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"mongodb-sink-Stocks\",\r\n    \"config\": {\r\n        \"connector.class\": \"com.mongodb.kafka.connect.MongoSinkConnector\",\r\n        \"tasks.max\": \"1\",\r\n        \"topics\": \"mysql_server_name.subaid_01.Stocks\",\r\n        \"connection.uri\": \"{{MongoSink}}\",\r\n        \"database\": \"{{MongoDB}}\",\r\n        \"collection\": \"stocks\",\r\n        \"change.data.capture.handler\": \"com.mongodb.kafka.connect.sink.cdc.debezium.rdbms.mysql.MysqlHandler\"\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/connectors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"connectors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sink Diagnostics_procedures",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"mongodb-sink-diagnostics-procedure\",\r\n    \"config\": {\r\n        \"connector.class\": \"com.mongodb.kafka.connect.MongoSinkConnector\",\r\n        \"tasks.max\": \"1\",\r\n        \"topics\": \"mysql_server_name.subaid_01.diagnostics_procedures\",\r\n        \"connection.uri\": \"{{MongoSink}}\",\r\n        \"database\": \"{{MongoDB}}\",\r\n        \"collection\": \"diagnostics_procedures\",\r\n        \"change.data.capture.handler\": \"com.mongodb.kafka.connect.sink.cdc.debezium.rdbms.mysql.MysqlHandler\"\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/connectors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"connectors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sink prescriptions_procedures",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"mongodb-sink-prescriptions-procedures\",\r\n    \"config\": {\r\n        \"connector.class\": \"com.mongodb.kafka.connect.MongoSinkConnector\",\r\n        \"tasks.max\": \"1\",\r\n        \"topics\": \"mysql_server_name.subaid_01.prescriptions_procedures\",\r\n        \"connection.uri\": \"{{MongoSink}}\",\r\n        \"database\": \"{{MongoDB}}\",\r\n        \"collection\": \"prescriptions_procedures\",\r\n        \"change.data.capture.handler\": \"com.mongodb.kafka.connect.sink.cdc.debezium.rdbms.mysql.MysqlHandler\"\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/connectors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"connectors"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
